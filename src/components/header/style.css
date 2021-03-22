@@ -1,0 +1,32 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    top: 0;
+    padding: 34px 64px;
+    background: rgba(58, 5, 135, 0.8);
+}
+.header_fixed{
+    position: absolute
+}
+.header > div{
+    display: flex;
+    width: max-content;
+    align-items: center;
+}
+.header > div > a{
+    margin-right: 34px;
+}
+@media screen and (min-width: 1280px) {
+    .header{
+        padding: 34px 100px;
+    }
+}
+@media (max-width: 568px){
+    .header{
+        padding: 20px 40px;
+    }
+}

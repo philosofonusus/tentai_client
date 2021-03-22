@@ -1,0 +1,9 @@
+.product__layout{
+    width: 100%;
+    display: flex;
+}
+.product__cover{
+    margin-top: 5vh;
+    max-width: 400px;
+    padding: 0 2.5vw 10vh 0;
+}

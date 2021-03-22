@@ -1,0 +1,13 @@
+.sidebar{
+    width: 320px;
+    right: 0;
+    background-color: white;
+    height: 100vh;
+    top: 0;
+    position: fixed;
+    transform: translateX(320px);
+    transition: 0.5s ease-in-out;
+}
+.sidebar_active{
+    transform: translateX(0);
+}

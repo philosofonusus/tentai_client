@@ -1,0 +1,25 @@
+.logo{
+    display: flex;
+    justify-content: flex-start;
+    text-decoration: none;
+    align-items: center;
+    width: max-content;
+}
+.logo img{
+  margin-right: 8px;
+}
+.logo__word{
+    text-decoration: none;
+    font-family: "Rubik", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 36px;
+    color: #FFFFF0;
+    -webkit-text-stroke: 1px black;
+}
+@media (max-width: 568px){
+    .logo img{
+        display: none;
+    }
+}

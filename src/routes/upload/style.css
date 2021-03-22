@@ -1,0 +1,10 @@
+.container{
+    max-width: 600px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin: auto;
+}
+.container input{
+    margin: 25px auto;
+}

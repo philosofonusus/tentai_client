@@ -1,0 +1,26 @@
+.searchField svg{
+    margin-top: 13px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-left: -33px;
+}
+.searchField{
+    display: flex;
+    max-width: 500px;
+}
+.searchField input{
+    border: 3px solid rgba(0, 0, 0, 0.5);
+    background: #3A0587;
+    color: white;
+    padding: 10px 16px;
+    width: 500px;
+    font-family: "Poppins", sans-serif;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    outline: none;
+}
+.searchField input::placeholder{
+    color: white;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+}
