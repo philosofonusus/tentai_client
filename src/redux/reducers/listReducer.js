@@ -1,6 +1,6 @@
 import {SET_LIST, SORT_LIST_BY_DATE, SORT_LIST_BY_RATING} from "../types";
 
-const listReducer = (state = [], action) => {
+const listReducer = (state = {data: [], listPage: 1, listCount: 0, pageSize: 10}, action) => {
     switch (action.type){
         case SET_LIST:
             const list = action.payload.val
@@ -14,17 +14,17 @@ const listReducer = (state = [], action) => {
                 default:
                     break
             }
-            return list
+            return {...state, data: list, [action.payload.count && 'listCount']: action.payload.count}
         case SORT_LIST_BY_DATE:
             if(!state) return state
-            const _arr = state.slice()
+            const _arr = state.data.slice()
             _arr.sort((a,b)=> b.uploadedAt - a.uploadedAt);
-            return _arr
+            return {...state, data: _arr}
         case SORT_LIST_BY_RATING:
             if(!state) return state
-            const __arr = state.slice()
+            const __arr = state.data.slice()
             __arr.sort((a,b) => b.rating - a.rating)
-            return __arr
+            return {...state, data: __arr}
         default:
             return state
     }

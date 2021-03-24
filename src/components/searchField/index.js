@@ -10,9 +10,10 @@ const SearchField = () => {
     const {request} = useHttp()
     const dispatch = useDispatch()
     const searchHandler = async (e) => {
-        if((e && e.key === 'Enter') || !e){
+        if((e && e.key === 'Enter') || !e.key){
             try{
-                const data = await request('http://localhost:3000/products/search', "POST", {searchTags: searchParams.searchTags, query: searchParams.searchQuery})
+                const data = await request('http://localhost:3000/products/search', "POST", {...searchParams, count: true})
+                console.log(data)
                 dispatch(setList(data))
             } catch (e) {
                 console.log(e)

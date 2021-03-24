@@ -1,15 +1,16 @@
-import React from 'preact'
+import React, {memo} from 'preact/compat'
 import styles from './style.css'
-import ListNavigation from "./ListNavigation";
 import ListCard from "./ListCard";
 
 const List = ({list}) => {
     return(
         <div class={styles.list}>
-            <ListNavigation/>
+            {list?.map(el => {
+                if(el) return <ListCard productData={el}/>
+            })}
         </div>
     )
 }
 
 
-export default List
+export default memo(List)

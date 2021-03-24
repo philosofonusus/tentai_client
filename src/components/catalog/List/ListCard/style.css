@@ -1,3 +1,39 @@
-.list__card{
-
+.card{
+    box-shadow: 0 0 rgba(0 0 0 0.2);
+    border-radius: 5px;
+    width: 100%;
+    position: relative;
+    max-width: 210px;
+    transition: all .15s ease-out;
+    height: max-content;
+}
+.card img{
+    min-height: 300px;
+    width: 100%;
+}
+.card__details {
+    transition: all .15s ease-out;
+    box-sizing: border-box;
+    padding: 0;
+    z-index: 8;
+    position: relative;
+    border-radius: 0;
+}
+.card__details h4{
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 15px 0 5px;
+    color: rgba(255,255,255,.6);
+}
+@media (max-width: 568px){
+    .card{
+        max-width: 150px;
+    }
+    .card img{
+        min-height: 200px;
+    }
 }

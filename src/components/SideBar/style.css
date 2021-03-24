@@ -4,10 +4,17 @@
     background-color: white;
     height: 100vh;
     top: 0;
+    z-index: 2;
     position: fixed;
     transform: translateX(320px);
     transition: 0.5s ease-in-out;
 }
 .sidebar_active{
-    transform: translateX(0);
+    transform: translateX(0) !important;
+}
+@media (max-width: 560px){
+    .sidebar{
+        width: 100vw;
+        transform: translateX(100vw)
+    }
 }

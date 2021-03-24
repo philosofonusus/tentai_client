@@ -6,11 +6,11 @@ import MenuBtn from "../MenuBtn";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-const Header = ({menuBtnActive, menuBtnSetActive, username, fixed_header}) => (
-	<header class={`${styles.header} ${fixed_header && styles.header_fixed}`}>
+const Header = ({menuBtnActive, menuBtnSetActive, username, fixed_header, bgNone}) => (
+	<header class={`${styles.header} ${fixed_header && styles.header_fixed} ${bgNone && styles.header_bgNone}`}>
 		<Logo/>
 		<div>
-			<Link to="/login">
+			<Link to="/login" class={styles.loginBtn}>
 				<OutlineBtn>
 					{username ? username : "Sign In"}
 				</OutlineBtn>

@@ -32,7 +32,9 @@ const ProductRoute = () => {
                             </h1>
                         </div>
                     </div>
-                    <ReactPlayer url={`http://localhost:3000/public/hentai/videos/${productData.episodes[0]}`} />
+                </div>
+                <div class={styles.videoContainer}>
+                    <ReactPlayer url={`http://localhost:3000/public/hentai/videos/${productData.episodes[0]}`} controls/>
                 </div>
             </div>
         </LayOut>

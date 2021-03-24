@@ -1,6 +1,28 @@
 .list{
     max-width: 1200px;
     display: grid;
-    grid-gap: 2vw;
+    margin: 20px auto;
+    grid-gap: 1vw;
     padding: 0 22px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+@media (max-width: 991px){
+    .list{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+@media (max-width: 768px){
+    .list{
+        padding: 0 10px;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media (max-width: 480px){
+    .list{
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 3vw;
+        padding: 0;
+        max-width: 310px;
+        margin: 30px auto;
+    }
 }

@@ -1,5 +1,5 @@
 import React , { useState } from 'preact/compat'
-import p from 'phin'
+import axios from 'axios'
 import InputFieldOutline from "../../components/InputFieldOutline";
 import FilledBtn from "../../components/FilledBtn"
 import styles from './style.css'
@@ -16,13 +16,13 @@ const UploadRoute = () => {
     }
     const upload = async () => {
         setLoading(true)
-        const filenames = await p({ url: 'http://localhost:3000/products/upload',  data: {...form, cover: filesToUpload.cover.name, episodes: Object.values(filesToUpload.episodes).map(el => el.name)}, method: "POST"})
+        const filenames = await axios.post('http://localhost:3000/products/upload', {...form, cover: filesToUpload.cover.name, episodes: Object.values(filesToUpload.episodes).map(el => el.name)})
         const filesToUploadData = new FormData()
         filesToUploadData.append("cover", filesToUpload.cover, filenames.data.coverFileName)
         for (let i in filenames.data.episodesFileNames) {
             filesToUploadData.append("episodes", Object.values(filesToUpload.episodes)[i], filenames.data.episodesFileNames[i])
         }
-        await p({url: 'http://localhost:3000/products/uploadFiles', data: filesToUploadData, method: "POST"}).finally(() => setLoading(false))
+        await axios.post('http://localhost:3000/products/uploadFiles', filesToUploadData).finally(() => setLoading(false))
     }
 
     return(
