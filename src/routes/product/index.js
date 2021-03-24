@@ -25,16 +25,9 @@ const ProductRoute = () => {
                     <div class={styles.product__cover}>
                         <img src={`http://localhost:3000/public/hentai/covers/${productData.cover}`} alt={productData.title}/>
                     </div>
-                    <div class={styles.product__info}>
-                        <div class={styles.product__details}>
-                            <h1 class={styles.product__title}>
-                                {productData.title}
-                            </h1>
-                        </div>
-                    </div>
                 </div>
                 <div class={styles.videoContainer}>
-                    <ReactPlayer url={`http://localhost:3000/public/hentai/videos/${productData.episodes[0]}`} controls/>
+                    <ReactPlayer url={`http://localhost:3000/public/hentai/videos/${productData.episodes[0]}`} width="100%" height="100%" controls/>
                 </div>
             </div>
         </LayOut>

@@ -6,7 +6,7 @@ import {useHttp} from "../../../../hooks/http.hook";
 import setList from "../../../../redux/actions/listActions/setList";
 
 const ListNavigation = ({list, searchParams}) => {
-    if(!list.data.length) return;
+    if(list.data.length < list.pageSize) return;
     const dispatch = useDispatch()
     const {request} = useHttp()
     const Navigate = async (n) => {
