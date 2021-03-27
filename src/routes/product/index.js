@@ -1,19 +1,24 @@
 import React, {useEffect, useState} from 'preact/compat'
 import ReactPlayer from 'react-player'
-import {useHttp} from "../../hooks/http.hook";
 import {useParams, Redirect} from "react-router-dom";
 import Loader from "../../components/loader";
+import request from "../../request"
 import LayOut from "../../components/layout";
 import styles from './style.css'
 
 const ProductRoute = () => {
     const [productData,  setProductData] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
     const {id} = useParams()
-    const {request, error, loading} = useHttp()
     useEffect(() => {
-        (async () => await request(`http://localhost:3000/products/item/${id}`))().then(data => {
-
+        setLoading(true);
+        (async () => await request(`http://localhost:3000/products/item/${id}`))().catch(e => {
+            setError(e)
+            setLoading(false)
+        }).then(data => {
             setProductData(data)
+            setLoading(false)
         })
     }, [id])
     if(error) return <Redirect to="/404" />
