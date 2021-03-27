@@ -1,6 +1,6 @@
 import {TOGGLE_SEARCHINGTAG, SET_SEARCH_QUERY} from "../types";
 
-const searchReducer = (state = {searchTags: [], searchQuery: ""}, action) => {
+const searchParamsReducer = (state = {searchTags: [], searchQuery: ""}, action) => {
     switch (action.type){
         case SET_SEARCH_QUERY:
             return {...state, searchQuery: action.payload}
@@ -13,4 +13,4 @@ const searchReducer = (state = {searchTags: [], searchQuery: ""}, action) => {
     }
 }
 
-export default searchReducer
+export default searchParamsReducer

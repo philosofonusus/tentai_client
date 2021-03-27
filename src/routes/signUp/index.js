@@ -6,14 +6,12 @@ import {Link, Redirect} from "react-router-dom";
 import FilledBtn from "../../components/FilledBtn";
 import CheckBox from "../../components/CheckBox";
 import {useDispatch} from "react-redux";
-import {useHttp} from "../../hooks/http.hook";
 import registerUser from "../../redux/actions/userActions/auth/registerUser";
 import {connect} from "react-redux";
 
 const RegisterRoute = ({user}) => {
     if(user) return <Redirect to="/"/>
     const dispatch = useDispatch()
-    const {request, loading} = useHttp()
     const [active, setActive] = useState(false)
     const [form, setForm] = useState({
         email: '',
@@ -32,7 +30,7 @@ const RegisterRoute = ({user}) => {
                 <InputFieldOutline onChange={InputChangeHandler} placeholder="Username" type="text" name="name"/>
                 <InputFieldOutline onChange={InputChangeHandler} placeholder="Password" type="password" name="password"/>
                 <CheckBox active={active} setActive={setActive} text={<span>I agree to the <Link class={styles.signContainer__link_a} to="/">Privacy Policy</Link></span>}/>
-                <FilledBtn disabled={loading} onClick={() => active && dispatch(registerUser(form, request))}>
+                <FilledBtn onClick={() => active && dispatch(registerUser(form))}>
                     Sign Up
                 </FilledBtn>
                 <span class={styles.signContainer__link}>

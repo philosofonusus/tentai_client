@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "preact build",
-    "serve": "sirv build --port 8080 --cors --single",
+    "serve": "sirv build --port 8080 --cors --single --host",
     "dev": "preact watch",
     "lint": "eslint src",
     "test": "jest"
@@ -28,7 +28,6 @@
     "sirv-cli": "1.0.3"
   },
   "dependencies": {
-    "phin": "^3.5.1",
     "preact": "^10.3.2",
     "preact-render-to-string": "^5.1.4",
     "preact-router": "^3.2.1",

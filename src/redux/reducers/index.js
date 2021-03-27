@@ -1,12 +1,12 @@
 import {combineReducers} from "redux";
 import listReducer from "./listReducer";
 import userReducer from "./userReducer";
-import searchReducer from "./searchReducer";
+import searchParamsReducer from "./searchReducer";
 
 const rootReducer = combineReducers({
     list: listReducer,
     user: userReducer,
-    searchParams: searchReducer
+    searchParams: searchParamsReducer
 })
 
 export default rootReducer

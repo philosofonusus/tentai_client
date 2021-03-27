@@ -1,20 +1,21 @@
 import React from 'preact/compat'
 import styles from './style.css'
 import {useDispatch, useSelector} from "react-redux";
-import {useHttp} from "../../hooks/http.hook";
+import request from '../../request'
 import setList from "../../redux/actions/listActions/setList";
 import setSearchQuery from "../../redux/actions/searchActions/searchParams/setSearchQuery";
+import setListQueryParams from "../../redux/actions/listActions/setListQueryParams";
 
 const SearchField = () => {
     const searchParams = useSelector(state => state.searchParams)
-    const {request} = useHttp()
+    const pageSize = useSelector(state => state.list.pageSize)
     const dispatch = useDispatch()
     const searchHandler = async (e) => {
         if((e && e.key === 'Enter') || !e.key){
             try{
-                const data = await request('http://localhost:3000/products/search', "POST", {...searchParams, count: true})
-                console.log(data)
+                const data = await request('http://localhost:3000/products/search', "POST", {...searchParams, count: true, pageSize})
                 dispatch(setList(data))
+                dispatch(setListQueryParams(searchParams))
             } catch (e) {
                 console.log(e)
             }
