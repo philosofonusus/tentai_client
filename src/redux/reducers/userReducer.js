@@ -8,7 +8,6 @@ const userReducer = (state = null, action) => {
             localStorage.setItem(userTokenStorage, "")
             return null
         case SET_USER:
-            console.log(action.payload)
             if(action.payload.save) localStorage.setItem(userTokenStorage, action.payload.data.token)
             return action.payload.data.user
         case ADD_FAVOURITE:

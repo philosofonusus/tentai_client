@@ -4,6 +4,7 @@ import {useParams, Redirect} from "react-router-dom";
 import Loader from "../../components/loader";
 import request from "../../request"
 import LayOut from "../../components/layout";
+import LazyImage from "../../components/lazyImage";
 import styles from './style.css'
 
 const ProductRoute = () => {
@@ -28,7 +29,28 @@ const ProductRoute = () => {
             <div className="containerBootstrap">
                 <div class={styles.product__layout}>
                     <div class={styles.product__cover}>
-                        <img src={`http://localhost:3000/public/hentai/covers/${productData.cover}`} alt={productData.title}/>
+                        <LazyImage src={`http://localhost:3000/public/hentai/covers/${productData.cover}`} alt={productData.title}/>
+                    </div>
+                    <div class={styles.product__info}>
+                        <h1 class={styles.product__title}>
+                            {productData.title}
+                        </h1>
+                        <p class={styles.product__description}>
+                            {productData.description}
+                        </p>
+                        <span class={styles.product__info_short}>
+                            Brand: <span class={styles.product__info_short_highlighted}>{productData.studio}</span>
+                        </span>
+                        <span class={styles.product__info_short}>
+                            Release Date: <span class={styles.product__info_short_highlighted}>{new Date(productData.releaseDate).toLocaleDateString()}</span>
+                        </span>
+                        <div class={styles.product__tagsContainer}>
+                            {productData.tags.map(el => {
+                                return <div>
+                                    {el}
+                                </div>
+                            })}
+                        </div>
                     </div>
                 </div>
                 <div class={styles.videoContainer}>

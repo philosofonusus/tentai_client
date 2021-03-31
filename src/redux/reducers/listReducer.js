@@ -1,6 +1,6 @@
 import {SET_LIST, SET_LIST_PAGE, SET_LIST_QUERY_PARAMS, SORT_LIST_BY_DATE, SORT_LIST_BY_RATING} from "../types";
 
-const listReducer = (state = {data: [], listPage: 1, listCount: 0, pageSize: 2, listQueryParams: {searchQuery: '', searchTags: []}}, action) => {
+const listReducer = (state = {data: [], listPage: 1, listCount: 0, pageSize: 10, listQueryParams: {searchQuery: '', searchTags: []}}, action) => {
     switch (action.type){
         case SET_LIST_PAGE:
             return {...state, listPage: action.payload}
