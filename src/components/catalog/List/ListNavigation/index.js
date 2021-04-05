@@ -6,10 +6,12 @@ import setListPage from "../../../../redux/actions/listActions/setListPage";
 
 const ListNavigation = ({list}) => {
     const dispatch = useDispatch()
+    const length = Math.ceil(list.listCount / list.pageSize)
+    if(length <= 1) return;
     return(
         <div class={styles.list__navigation}>
             {
-                Array.from({length: Math.ceil(list.listCount / list.pageSize)}, (_, i) => i + 1).map(el => {
+                Array.from({ length }, (_, i) => i + 1).map(el => {
                     return <PageBubble disabled={list.listPage === el} onClick={() => dispatch(setListPage(el))}>
                         {el}
                     </PageBubble>

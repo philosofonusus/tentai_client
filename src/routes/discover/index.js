@@ -1,7 +1,6 @@
 import React, {useEffect} from 'preact/compat'
 import LayOut from "../../components/layout";
 import Catalog from "../../components/catalog";
-import styles from './style.css'
 import request from '../../request'
 import {useDispatch, connect} from "react-redux";
 import setList from '../../redux/actions/listActions/setList'
@@ -20,9 +19,6 @@ const DiscoverRoute = ({listPageSize, isList}) => {
     }, [])
     return(
         <LayOut fixed_header>
-            <h1 class={styles.discover__title}>
-                discover
-            </h1>
             <Catalog/>
         </LayOut>
     )
