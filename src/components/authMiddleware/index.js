@@ -7,8 +7,8 @@ import authByToken from "../../redux/actions/userActions/auth/authByToken";
 const AuthMiddleware = (props) => {
     const [loading, setLoading] = useState(true)
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(authByToken()).finally(() => setLoading(false))
+    useEffect(async () => {
+        await dispatch(authByToken()).finally(() => setLoading(false))
     }, [])
     if(loading) return <Loader />
     return(

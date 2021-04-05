@@ -1,4 +1,4 @@
-.searchField svg{
+.searchField__searchIcon{
     margin-top: 13px;
     cursor: pointer;
     width: 20px;
@@ -8,6 +8,19 @@
 .searchField{
     display: flex;
     max-width: 500px;
+}
+.searchField__filterBtn{
+    display: flex;
+    padding: 0 5px;
+    justify-content: center;
+    margin-right: auto;
+    border: 3px solid rgba(0,0,0,0.5);
+    cursor: pointer;
+    align-items: center;
+    outline: none;
+    border-right: none;
+    background: #3A0587;
+    box-sizing: border-box;
 }
 .searchField input{
     border: 3px solid rgba(0, 0, 0, 0.5);
@@ -27,6 +40,9 @@
 @media (max-width: 568px){
     .searchField{
         max-width: 300px;
+    }
+    .searchField__filterBtn{
+        display: none;
     }
 }
 @media (max-width: 420px){

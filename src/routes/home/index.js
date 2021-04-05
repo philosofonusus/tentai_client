@@ -17,9 +17,6 @@ const HomeRoute = () => {
 				</FilledBtn>
 			</Link>
 		</div>
-		<section class={styles.showcase}>
-
-		</section>
 	</LayOut>
 	)
 }

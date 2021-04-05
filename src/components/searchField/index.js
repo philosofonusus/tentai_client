@@ -23,11 +23,18 @@ const SearchField = () => {
     }
     return(
         <div class={styles.searchField}>
+            <div class={styles.searchField__filterBtn}>
+                <svg width="32" height="32" fill="none">
+                    <path d="M28 9H11a1 1 0 110-2h17a1 1 0 110 2zM7 9H4a1 1 0 010-2h3a1 1 0 010 2zM21 17H4a1 1 0 010-2h17a1 1 0 010 2zM11 25H4a1 1 0 010-2h7a1 1 0 010 2z" fill="#fff"/>
+                    <path d="M9 11a3 3 0 110-6 3 3 0 010 6zm0-4a1 1 0 100 2 1 1 0 000-2zM23 19a3 3 0 110-5.999A3 3 0 0123 19zm0-4a1 1 0 100 2.002A1 1 0 0023 15zM13 27a3 3 0 110-5.999A3 3 0 0113 27zm0-4a1 1 0 100 2.002A1 1 0 0013 23z" fill="#fff"/>
+                    <path d="M28 17h-3a1 1 0 010-2h3a1 1 0 010 2zM28 25H15a1 1 0 010-2h13a1 1 0 010 2z" fill="#fff"/>
+                </svg>
+            </div>
             <input placeholder="Pick your poison"
                    onChange={(e) => dispatch(setSearchQuery(e.target.value))}
                    onKeyDown={searchHandler}
             />
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={searchHandler}>
+            <svg class={styles.searchField__searchIcon} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={searchHandler}>
                 <g clip-path="url(#clip0)">
                     <path d="M4.97023 4.09634C4.71064 3.83654 4.28947 3.83654 4.02987 4.09634C3.06603 5.06019 2.5923 6.40287 2.72997 7.78037C2.76432 8.12353 3.05341 8.37932 3.39101 8.37932C3.4132 8.37932 3.43556 8.3782 3.45774 8.37598C3.82329 8.33942 4.08995 8.01331 4.05339 7.648C3.95541 6.66908 4.28971 5.71722 4.97023 5.03667C5.23004 4.77711 5.23004 4.3559 4.97023 4.09634Z" fill="white"/>
                     <path d="M7.60345 0C3.41089 0 0 3.41089 0 7.60345C0 11.796 3.41089 15.2069 7.60345 15.2069C11.796 15.2069 15.2069 11.796 15.2069 7.60345C15.2069 3.41089 11.796 0 7.60345 0ZM7.60345 13.8768C4.14422 13.8768 1.33007 11.0627 1.33007 7.60345C1.33007 4.14422 4.14422 1.33007 7.60345 1.33007C11.0625 1.33007 13.8768 4.14422 13.8768 7.60345C13.8768 11.0627 11.0627 13.8768 7.60345 13.8768Z" fill="white"/>
