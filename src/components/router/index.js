@@ -13,7 +13,7 @@ import DiscoverRoute from "../../routes/discover";
 const Router = ({user}) => (
     <Switch>
         <Route path="/" component={HomeRoute} exact/>
-        <Route path="/upload" component={UploadRoute} exact/>
+        <Route path="/upload" component={() => !user || user.role < 1 ? <Redirect to="/"/> : <UploadRoute/>} exact/>
         <Route path="/product/:id" component={ProductRoute} exact/>
         <Route path="/discover" component={DiscoverRoute} exact/>
         <Route path="/404" component={Route404} exact/>

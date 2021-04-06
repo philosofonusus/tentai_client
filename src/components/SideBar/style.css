@@ -8,6 +8,14 @@
     position: fixed;
     transform: translateX(320px);
     transition: 0.5s ease-in-out;
+    padding-top: 150px;
+    color: black;
+}
+.sidebar a{
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 50px;
 }
 .sidebar_active{
     transform: translateX(0) !important;
