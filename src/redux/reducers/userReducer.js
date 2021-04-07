@@ -8,8 +8,9 @@ const userReducer = (state = null, action) => {
             localStorage.setItem(userTokenStorage, "")
             return null
         case SET_USER:
-            if(action.payload.save) localStorage.setItem(userTokenStorage, action.payload.data.token)
-            return action.payload.data.user
+            if(action.payload.remember === '1') localStorage.setItem(userTokenStorage, action.payload.data.token)
+            else if(action.payload.remember === '0') sessionStorage.setItem(userTokenStorage, action.payload.data.token)
+            return {...action.payload.data.user, temp: action.payload.remember }
         case ADD_FAVOURITE:
             return {...state, favourites: [...state.favourites, action.payload]}
         case REMOVE_FAVOURITE:

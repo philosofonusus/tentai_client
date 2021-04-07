@@ -13,7 +13,7 @@ const listReducer = (state = {data: [], listPage: 1, listCount: 0, pageSize: 10,
                     list.sort((a,b) => b.rating - a.rating)
                     break
                 case SORT_LIST_BY_DATE:
-                    list.sort((a,b)=> b.uploadedAt - a.uploadedAt);
+                    list.sort((a,b)=> +b.uploadedAt - +a.uploadedAt);
                     break
                 default:
                     break
@@ -22,7 +22,7 @@ const listReducer = (state = {data: [], listPage: 1, listCount: 0, pageSize: 10,
         case SORT_LIST_BY_DATE:
             if(!state) return state
             const _arr = state.data.slice()
-            _arr.sort((a,b)=> b.uploadedAt - a.uploadedAt);
+            _arr.sort((a,b)=> +b.uploadedAt - +a.uploadedAt);
             return {...state, data: _arr}
         case SORT_LIST_BY_RATING:
             if(!state) return state

@@ -9,4 +9,4 @@ const SideBar = ({active, userRole}) => (
     </aside>
 )
 
-export default connect(state => ({userRole: state.user.role}))(SideBar)
+export default connect(state => ({userRole: state.user?.role}))(SideBar)

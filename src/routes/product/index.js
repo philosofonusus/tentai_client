@@ -6,12 +6,13 @@ import request from "../../request"
 import LayOut from "../../components/layout";
 import LazyImage from "../../components/lazyImage";
 import styles from './style.css'
+import CommentBlock from "../../components/CommentsBlock";
 
 const ProductRoute = () => {
     const [productData,  setProductData] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
-    const {id} = useParams()
+    const { id } = useParams()
     useEffect(() => {
         setLoading(true);
         (async () => await request(`http://localhost:3000/products/item/${id}`))().catch(e => {
@@ -54,8 +55,10 @@ const ProductRoute = () => {
                     </div>
                 </div>
                 <div class={styles.videoContainer}>
-                    <ReactPlayer url={`http://localhost:3000/public/hentai/videos/${productData.episodes[0]}`} width="100%" height="100%" controls/>
+                    <ReactPlayer url={`http://localhost:3000/public/hentai/videos/${productData.episodes[0]}`} width="100%" height="100%" controls
+                                 config={{ file: { attributes: { controlsList: 'nodownload' } } }}/>
                 </div>
+                <CommentBlock/>
             </div>
         </LayOut>
     )

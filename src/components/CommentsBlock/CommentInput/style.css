@@ -1,0 +1,50 @@
+.commentInputBlock {
+    background-color: #310673;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    width: 100%;
+    padding: 30px 37px;
+    height: 250px;
+}
+.commentInputBlock div{
+    background: #3A0587;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    padding: 30px;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+.commentInputBlock textarea{
+    background-color: transparent;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: rgba(255,255,255,0.85);
+    resize: none;
+    font-size: 18px;
+    border: none;
+    min-height: 140px;
+    line-height: 27px;
+    width: 100%;
+    height: 100%;
+
+}
+.commentInputBlock textarea::placeholder{
+    color: rgba(255,255,255,0.85);
+}
+.commentInputBlock button{
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    margin-right: -50px;
+    margin-left: -30px;
+    border: 0;
+}
+.commentInputBlock button:active svg{
+    fill: white;
+}

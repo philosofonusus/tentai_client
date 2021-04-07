@@ -54,6 +54,9 @@
     width: 100%;
     margin: 0 auto;
 }
+.videoContainer video{
+    outline: none;
+}
 .videoContainer > div{
     outline: none;
     width: 100%;
