@@ -30,6 +30,7 @@
     border: none;
     min-height: 100px;
     line-height: 27px;
+    height: calc(100% - 35px);
     width: 100%;
 }
 .commentInputBlock__btnContainer{
@@ -56,6 +57,6 @@
         height: 230px;
     }
     .commentInputBlock > div{
-        padding: 20px;
+        padding: 20px 20px 10px;
     }
 }
