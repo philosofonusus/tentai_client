@@ -7,6 +7,7 @@
     min-width: 400px;
     margin: 5vh 10px 0 50px;
 }
+
 .product__cover img{
     width: 100%;
 }
@@ -68,6 +69,7 @@
     margin-top: 10vh;
     font-family: "Poppins", sans-serif;
 }
+
 @media (max-width: 568px){
     .product__cover{
         padding: 0;
@@ -80,5 +82,10 @@
     .product__layout{
         flex-direction: column;
         margin-top: -30px;
+    }
+}
+@media (max-width: 400px){
+    .product__title{
+        margin-top: 5vh;
     }
 }

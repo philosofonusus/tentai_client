@@ -8,7 +8,7 @@
     padding: 30px 37px;
     height: 250px;
 }
-.commentInputBlock div{
+.commentInputBlock > div{
     background: #3A0587;
     border: 1px solid #000000;
     box-sizing: border-box;
@@ -28,11 +28,13 @@
     resize: none;
     font-size: 18px;
     border: none;
-    min-height: 140px;
+    min-height: 100px;
     line-height: 27px;
     width: 100%;
-    height: 100%;
-
+}
+.commentInputBlock__btnContainer{
+    display: flex;
+    justify-content: flex-end;
 }
 .commentInputBlock textarea::placeholder{
     color: rgba(255,255,255,0.85);
@@ -41,10 +43,19 @@
     background-color: transparent;
     outline: none;
     cursor: pointer;
-    margin-right: -50px;
-    margin-left: -30px;
+    margin-left: auto;
     border: 0;
+
 }
 .commentInputBlock button:active svg{
     fill: white;
+}
+@media (max-width: 568px){
+    .commentInputBlock{
+        padding: 20px;
+        height: 230px;
+    }
+    .commentInputBlock > div{
+        padding: 20px;
+    }
 }

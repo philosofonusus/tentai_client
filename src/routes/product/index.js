@@ -4,6 +4,7 @@ import {useParams, Redirect} from "react-router-dom";
 import Loader from "../../components/loader";
 import request from "../../request"
 import LayOut from "../../components/layout";
+import bootstrap from './containerBootstrap.css'
 import LazyImage from "../../components/lazyImage";
 import styles from './style.css'
 import CommentBlock from "../../components/CommentsBlock";
@@ -27,7 +28,7 @@ const ProductRoute = () => {
     if(!productData || loading) return <Loader/>
     return(
         <LayOut>
-            <div className="containerBootstrap">
+            <div class={bootstrap.containerBootstrap}>
                 <div class={styles.product__layout}>
                     <div class={styles.product__cover}>
                         <LazyImage src={`http://localhost:3000/public/hentai/covers/${productData.cover}`} alt={productData.title}/>

@@ -14,26 +14,3 @@ html, body {
 * {
 	box-sizing: border-box;
 }
-
-.containerBootstrap {
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-@media (min-width: 768px) {
-	.container {
-		width: 750px;
-	}
-}
-@media (min-width: 992px) {
-	.containerBootstrap {
-		width: 970px;
-	}
-}
-@media (min-width: 1200px) {
-	.containerBootstrap {
-		width: 1170px;
-	}
-}
