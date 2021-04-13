@@ -1,14 +1,12 @@
 import React from 'preact/compat'
 import styles from './style.css'
-import {useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import request from '../../request'
 import setList from "../../redux/actions/listActions/setList";
 import setSearchQuery from "../../redux/actions/searchActions/searchParams/setSearchQuery";
 import setListQueryParams from "../../redux/actions/listActions/setListQueryParams";
 
-const SearchField = () => {
-    const searchParams = useSelector(state => state.searchParams)
-    const pageSize = useSelector(state => state.list.pageSize)
+const SearchField = ({pageSize, searchParams}) => {
     const dispatch = useDispatch()
     const searchHandler = async (e) => {
         if((e && e.key === 'Enter') || !e.key){
@@ -31,6 +29,7 @@ const SearchField = () => {
                 </svg>
             </div>
             <input placeholder="Pick your poison"
+                   value={searchParams.searchQuery}
                    onChange={(e) => dispatch(setSearchQuery(e.target.value))}
                    onKeyDown={searchHandler}
             />
@@ -50,4 +49,4 @@ const SearchField = () => {
     )
 }
 
-export default SearchField
+export default connect(state => ({searchParams: state.searchParams, pageSize: state.list.pageSize}))(SearchField)

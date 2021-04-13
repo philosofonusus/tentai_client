@@ -1,0 +1,16 @@
+.tag{
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: 2px solid white;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    transition: 0.25s ease-in-out;
+    padding: 2px 8px;
+}
+.tag_active{
+    background-color: white;
+    color: black;
+}

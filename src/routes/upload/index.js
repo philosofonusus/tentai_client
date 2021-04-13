@@ -1,28 +1,33 @@
 import React , { useState } from 'preact/compat'
-import axios from 'axios'
 import InputFieldOutline from "../../components/InputFieldOutline";
 import FilledBtn from "../../components/FilledBtn"
+import request from '../../request'
 import styles from './style.css'
+import TagsComponent from "../../components/tagsComponent";
+import {useDispatch, useSelector} from "react-redux";
+import clearSearchTags from "../../redux/actions/searchActions/searchParams/clearSearchTags";
 
 const UploadRoute = () => {
     const [form, setForm] = useState({tags: []})
     const [filesToUpload, setFilesToUpload] = useState({})
-    const [loading, setLoading] = useState(false)
     const [episodes, setEpisodes] = useState(1)
+    const dispatch = useDispatch()
+    const searchTags = useSelector(state => state.searchParams.searchTags)
     const [alternativeNames, setAlternativeNames] = useState(1)
 
     const formPropsHandler = (e) => {
         setForm({...form, [e.target.name]: e.target.value})
     }
     const upload = async () => {
-        setLoading(true)
-        const filenames = await axios.post('http://localhost:3000/products/upload', {...form, cover: filesToUpload.cover.name, episodes: Object.values(filesToUpload.episodes).map(el => el.name)})
+        const filenames = await request('http://localhost:3000/products/upload', "POST",{...form, cover: filesToUpload.cover.name, episodes: Object.values(filesToUpload.episodes).map(el => el.name), tags: searchTags})
         const filesToUploadData = new FormData()
-        filesToUploadData.append("cover", filesToUpload.cover, filenames.data.coverFileName)
-        for (let i in filenames.data.episodesFileNames) {
-            filesToUploadData.append("episodes", Object.values(filesToUpload.episodes)[i], filenames.data.episodesFileNames[i])
+        filesToUploadData.append("cover", filesToUpload.cover, filenames.coverFileName)
+        for (let i in filenames.episodesFileNames) {
+            filesToUploadData.append("episodes", Object.values(filesToUpload.episodes)[i], filenames.episodesFileNames[i])
         }
-        await axios.post('http://localhost:3000/products/uploadFiles', filesToUploadData).finally(() => setLoading(false))
+        await fetch('http://localhost:3000/products/uploadFiles',
+            {method: 'POST', body: filesToUploadData})
+        dispatch(clearSearchTags())
     }
 
     return(
@@ -53,6 +58,7 @@ const UploadRoute = () => {
             <textarea name="description"
                       onChange={formPropsHandler}
             />
+            <TagsComponent />
             <FilledBtn onClick={() => upload()}>
                 Upload
             </FilledBtn>

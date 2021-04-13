@@ -18,6 +18,36 @@
     height: 100%;
     border-radius: 15px;
 }
+.commentInputAlert{
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+}
+.commentInputAlert span{
+    text-align: center;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+}
+.commentInputAlert svg{
+    margin-bottom: 10px;
+    height: 40px;
+    width: 40px;
+    fill: #ffec00;
+}
+.commentInputAlert__link{
+    margin-top: 10px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 18px;
+    line-height: 27px;
+    text-decoration: underline;
+    color: #ffec00;
+    text-align: center;
+}
 .commentInputBlock textarea{
     background-color: transparent;
     outline: none;
@@ -50,6 +80,11 @@
 }
 .commentInputBlock button:active svg{
     fill: white;
+}
+@media(min-width: 768px){
+    .commentInputAlert span{
+        max-width: 50%;
+    }
 }
 @media (max-width: 568px){
     .commentInputBlock{
