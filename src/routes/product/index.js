@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'preact/compat'
 import ReactPlayer from 'react-player'
-import {useParams, Redirect} from "react-router-dom";
+import {useParams, Redirect, useLocation} from "react-router-dom";
 import Loader from "../../components/loader";
 import request from "../../request"
 import LayOut from "../../components/layout";
@@ -14,7 +14,13 @@ const ProductRoute = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const { id } = useParams()
+    const { data: locationData } = useLocation()
+
     useEffect(() => {
+        if(locationData) {
+            setProductData(locationData)
+            return
+        }
         setLoading(true);
         (async () => await request(`http://localhost:3000/products/item/${id}`))().catch(e => {
             setError(e)

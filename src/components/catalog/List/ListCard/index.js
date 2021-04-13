@@ -6,7 +6,7 @@ import LazyImage from "../../../lazyImage";
 const ListCard = ({productData}) => {
     return(
     <div class={styles.card}>
-        <Link to={`/product/${productData._id}`}>
+        <Link to={{pathname: `/product/${productData._id}`, data: productData}}>
             <LazyImage src={`http://localhost:3000/public/hentai/covers/${productData.cover}`} alt={productData.title}/>
         </Link>
         <div class={styles.card__details}>
