@@ -70,6 +70,7 @@
 }
 .comment__ControlsContainer button > svg{
     width: 25px;
+    fill: #ffec00;
     height: 25px;
 }
 .comment__footer{
@@ -77,4 +78,22 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
+}
+.comment__body textarea{
+    background-color: transparent;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: rgba(255,255,255,0.85);
+    height: fit-content;
+    max-width: 100%;
+    word-wrap: break-word;
+    resize: none;
+    font-size: 17px;
+    border: none;
+    min-height: 100px;
+    line-height: 25px;
+    overflow-y: visible;
+    width: 100%;
 }

@@ -21,7 +21,7 @@ const CommentBlock = () => {
             <CommentInput productId={productId} getComments={getComments}/>
             {
                 comments.map(el => {
-                    return <Comment data={el} />
+                    return <Comment getComments={getComments} data={el} />
                 })
             }
         </div>

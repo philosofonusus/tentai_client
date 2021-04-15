@@ -10,6 +10,7 @@ const CommentInput = ({productId, getComments, isUser}) => {
     const userToken = useGetUserToken()
 
     const addComment = async () => {
+        if(!commentBody) return
        await request(
             'http://localhost:3000/users/comments/create',
             "POST",

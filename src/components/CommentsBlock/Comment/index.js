@@ -1,13 +1,33 @@
-import React from 'preact/compat'
+import React, {useState, useEffect} from 'preact/compat'
 import styles from './style.css'
 import request from '../../../request'
 import { connect } from "react-redux";
 import {useGetUserToken} from "../../../hooks/getUserToken.hook";
 
-const Comment = ({data, userId}) => {
+const Comment = ({data, userId, getComments}) => {
     const userToken = useGetUserToken()
+    const [editMode, setEditMode] = useState(false)
+    const [editedComment, setEditedComment] = useState(data.body)
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        setEditedComment(data.body)
+    }, [editMode])
+
     const deleteComment = async (id) => {
-        await request('http://localhost:3000/users/comments/remove', "POST", {commentId: id}, {Authorization: `Bearer ${userToken}`})
+        setLoading(true)
+        await request('http://localhost:3000/users/comments/remove', "POST", {commentId: id}, {Authorization: `Bearer ${userToken}`}).finally(() => {
+            setLoading(false)
+        })
+        await getComments()
+    }
+    const updateComment = async (id, body) => {
+        if(editedComment === data.body || !editedComment) return
+        setLoading(true)
+        await request('http://localhost:3000/users/comments/edit', "POST", {commentId: id, body}, {Authorization: `Bearer ${userToken}`}).finally(() => {
+            setLoading(false)
+        })
+        await getComments()
     }
     return(
     <div class={styles.comment}>
@@ -20,9 +40,15 @@ const Comment = ({data, userId}) => {
             </span>
         </div>
         <div class={styles.comment__body}>
-            <p>
-                { data.body }
-            </p>
+            { editMode ?
+                <textarea value={editedComment} onChange={e => setEditedComment(e.target.value)}>
+
+                </textarea>
+                :
+                <p>
+                    {data.body}
+                </p>
+            }
         </div>
         <div class={styles.comment__footer}>
             <div class={styles.comment__OpinionContainer}>
@@ -30,7 +56,8 @@ const Comment = ({data, userId}) => {
             </div>
             { userId === data.uploadedBy &&
             <div class={styles.comment__ControlsContainer}>
-                <button>
+                {!editMode ?
+                <button onClick={() => setEditMode(true)}>
                     <svg fill="#ffec00" viewBox="0 0 348.882 348.882">
                         <path
                             d="M333.988 11.758l-.42-.383A43.363 43.363 0 00304.258 0a43.579 43.579 0 00-32.104 14.153L116.803 184.231a14.993 14.993 0 00-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 005.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"/>
@@ -38,7 +65,21 @@ const Comment = ({data, userId}) => {
                             d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"/>
                     </svg>
                 </button>
-                <button onClick={() => deleteComment(data._id)}>
+                    :
+                    <>
+                    <button disabled={loading} onClick={() => {
+                        setEditMode(false)
+                        updateComment(data._id, editedComment)
+                    }
+                    }>
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" enable-background="new 0 0 515.556 515.556" height="512" viewBox="0 0 515.556 515.556" width="512"><path d="m0 274.226 176.549 176.886 339.007-338.672-48.67-47.997-290.337 290-128.553-128.552z"/></svg>
+                    </button>
+                    <button onClick={() => setEditMode(false)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" enable-background="new 0 0 386.667 386.667" height="512" viewBox="0 0 386.667 386.667" width="512"><path d="m386.667 45.564-45.564-45.564-147.77 147.769-147.769-147.769-45.564 45.564 147.769 147.769-147.769 147.77 45.564 45.564 147.769-147.769 147.769 147.769 45.564-45.564-147.768-147.77z"/></svg>
+                    </button>
+                    </>
+                }
+                <button disabled={loading} onClick={() => deleteComment(data._id)}>
                     <svg fill="#ffec00" xmlns="http://www.w3.org/2000/svg" height="427pt" viewBox="-40 0 427 427.00131"
                          width="427pt">
                         <path

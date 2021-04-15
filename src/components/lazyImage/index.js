@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "preact/compat";
+import React, { useState, useEffect, useRef } from "preact/compat";
 import styled from "styled-components";
 
 const placeHolder =
@@ -25,14 +25,13 @@ const Image = styled.img`
   }
 
   &.has-error {
-    // fallback to placeholder image on error
     content: url(${placeHolder});
   }
 `;
 
 const LazyImage = ({ src, alt }) => {
-    const [imageSrc, setImageSrc] = useState(placeHolder);
-    const [imageRef, setImageRef] = useState();
+    const placeholder = useRef();
+    const [showImage, setShowImage] = useState(false);
 
     const onLoad = event => {
         event.target.classList.add("loaded");
@@ -42,54 +41,36 @@ const LazyImage = ({ src, alt }) => {
         event.target.classList.add("has-error");
     };
 
-    useEffect(
-        () => {
-            let observer;
-            let didCancel = false;
+    useEffect(() => {
+        const callback = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setShowImage(true);
+                }
+            });
+        };
 
-            if (imageRef && imageSrc !== src) {
-                if (IntersectionObserver) {
-                    observer = new IntersectionObserver(
-                        entries => {
-                            entries.forEach(entry => {
-                                if (
-                                    !didCancel &&
-                                    (entry.intersectionRatio > 0 || entry.isIntersecting)
-                                ) {
-                                    setImageSrc(src);
-                                    observer.unobserve(imageRef);
-                                }
-                            });
-                        },
-                        {
-                            threshold: 0.01,
-                            rootMargin: "75%"
-                        }
-                    );
-                    observer.observe(imageRef);
-                } else {
-                    // Old browsers fallback
-                    setImageSrc(src);
-                }
-            }
-            return () => {
-                didCancel = true;
-                // on component cleanup, we remove the listner
-                if (observer && observer.unobserve) {
-                    observer.unobserve(imageRef);
-                }
-            };
-        },
-        [src, imageSrc, imageRef]
-    );
+        const options = {
+            threshold: 1.0
+        };
+
+        const observer = new IntersectionObserver(callback, options);
+        observer.observe(placeholder.current);
+
+        return () => observer.disconnect();
+    }, []);
     return (
-        <Image
-            ref={setImageRef}
-            src={imageSrc}
-            alt={alt}
-            onLoad={onLoad}
-            onError={onError}
-        />
-    );
-};
+        <>
+            {!showImage
+                ? <Image src={placeHolder} ref={placeholder} alt={alt}/>
+                : <Image
+                    onLoad={onLoad}
+                    onError={onError}
+                    src={src} alt={alt}
+                />
+            }
+        </>
+    )
+}
+
 export default LazyImage
