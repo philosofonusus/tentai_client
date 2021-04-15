@@ -2,7 +2,7 @@ import React, {useState} from 'preact/compat'
 import InputFieldOutline from "../../components/InputFieldOutline";
 import styles from '../sign.css'
 import {logo__word} from'../../components/logo/style.css'
-import {Link, Redirect} from "react-router-dom";
+import {Link, Redirect, useHistory} from "react-router-dom";
 import {connect} from 'react-redux'
 import FilledBtn from "../../components/FilledBtn";
 import CheckBox from "../../components/CheckBox";
@@ -11,6 +11,7 @@ import loginUser from "../../redux/actions/userActions/auth/loginUser";
 
 const LoginRoute = ({user}) => {
     if(user) return <Redirect to="/"/>
+    const history = useHistory()
     const dispatch = useDispatch()
     const [active, setActive] = useState(false)
     const [form, setForm] = useState({
@@ -29,7 +30,10 @@ const LoginRoute = ({user}) => {
                 <InputFieldOutline onChange={InputChangeHandler} placeholder="Email" type="email"  name="email"/>
                 <InputFieldOutline onChange={InputChangeHandler} placeholder="Password" name="password" type="password"/>
                 <CheckBox active={active} setActive={setActive} text={<span>Remember me</span>} />
-                <FilledBtn onClick={() => dispatch(loginUser(form, active))}>
+                <FilledBtn onClick={() => {
+                    dispatch(loginUser(form, active))
+                    return history.length > 2 ? history.goBack() : history.push('/')
+                }}>
                     Log In
                 </FilledBtn>
                 <span class={styles.signContainer__link}>

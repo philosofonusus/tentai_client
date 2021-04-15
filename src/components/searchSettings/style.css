@@ -1,6 +1,18 @@
 .searchSettingsModal{
     width: 100%;
-    background-color: #3a0587;
+    background-color: #310673;
     height: 100%;
-    overflow-y: scroll;
+    display: none;
+    padding: 30px;
+    top: 322px;
+    z-index: 3;
+    border: 1px solid black;
+    border-top: 0;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+}
+.searchSettingsModal_active{
+    display: flex;
 }

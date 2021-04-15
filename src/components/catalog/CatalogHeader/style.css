@@ -1,5 +1,4 @@
 .catalogHeader__body{
-    position: sticky;
     border: 1px solid #000000;
     box-sizing: border-box;
     padding: 25px 0;
@@ -11,4 +10,10 @@
     align-items: center;
     justify-content: center;
     max-width: 1200px;
+}
+.catalogHeader{
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1px;
+    z-index: 2;
 }

@@ -2,7 +2,7 @@ import React, {useState} from 'preact/compat'
 import InputFieldOutline from "../../components/InputFieldOutline";
 import styles from '../sign.css'
 import {logo__word} from'../../components/logo/style.css'
-import {Link, Redirect} from "react-router-dom";
+import {Link, Redirect, useHistory} from "react-router-dom";
 import FilledBtn from "../../components/FilledBtn";
 import CheckBox from "../../components/CheckBox";
 import {useDispatch} from "react-redux";
@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 const RegisterRoute = ({user}) => {
     if(user) return <Redirect to="/"/>
     const dispatch = useDispatch()
+    const history = useHistory()
     const [active, setActive] = useState(false)
     const [form, setForm] = useState({
         email: '',
@@ -30,7 +31,10 @@ const RegisterRoute = ({user}) => {
                 <InputFieldOutline onChange={InputChangeHandler} placeholder="Username" type="text" name="name"/>
                 <InputFieldOutline onChange={InputChangeHandler} placeholder="Password" type="password" name="password"/>
                 <CheckBox active={active} setActive={setActive} text={<span>I agree to the <Link class={styles.signContainer__link_a} to="/">Privacy Policy</Link></span>}/>
-                <FilledBtn onClick={() => active && dispatch(registerUser(form))}>
+                <FilledBtn onClick={() => {
+                    active && dispatch(registerUser(form))
+                    return history.length > 2 ? history.goBack() : history.push('/')
+                }}>
                     Sign Up
                 </FilledBtn>
                 <span class={styles.signContainer__link}>
