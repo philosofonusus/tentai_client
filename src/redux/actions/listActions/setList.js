@@ -4,7 +4,7 @@ import {sort_type} from "./listSort/variables";
 const setList = (val) => {
     return{
         type: SET_LIST,
-        payload: {val: val.list.filter(Boolean), sort_type, count: val?.count}
+        payload: {val: val.list, sort_type, count: val?.count}
     }
 }
 export default setList
