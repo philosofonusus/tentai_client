@@ -6,11 +6,13 @@ import styles from './style.css'
 import TagsComponent from "../../components/tagsComponent";
 import {useDispatch, useSelector} from "react-redux";
 import clearSearchTags from "../../redux/actions/searchActions/searchParams/clearSearchTags";
+import {useGetUserToken} from "../../hooks/getUserToken.hook";
 
 const UploadRoute = () => {
     const [form, setForm] = useState({tags: []})
     const [filesToUpload, setFilesToUpload] = useState({})
     const [episodes, setEpisodes] = useState(1)
+    const userToken = useGetUserToken()
     const dispatch = useDispatch()
     const searchTags = useSelector(state => state.searchParams.searchTags)
     const [alternativeNames, setAlternativeNames] = useState(1)
@@ -19,14 +21,14 @@ const UploadRoute = () => {
         setForm({...form, [e.target.name]: e.target.value})
     }
     const upload = async () => {
-        const filenames = await request('http://localhost:3000/products/upload', "POST",{...form, cover: filesToUpload.cover.name, episodes: Object.values(filesToUpload.episodes).map(el => el.name), tags: searchTags})
+        const filenames = await request('http://localhost:3000/products/upload', "POST",{...form, cover: filesToUpload.cover.name, episodes: Object.values(filesToUpload.episodes).map(el => el.name), tags: searchTags}, {Authorization: `Bearer ${userToken}`})
         const filesToUploadData = new FormData()
         filesToUploadData.append("cover", filesToUpload.cover, filenames.coverFileName)
         for (let i in filenames.episodesFileNames) {
             filesToUploadData.append("episodes", Object.values(filesToUpload.episodes)[i], filenames.episodesFileNames[i])
         }
         await fetch('http://localhost:3000/products/uploadFiles',
-            {method: 'POST', body: filesToUploadData})
+            {method: 'POST', body: filesToUploadData, headers: {Authorization: `Bearer ${userToken}`}})
         dispatch(clearSearchTags())
     }
 

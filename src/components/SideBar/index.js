@@ -5,7 +5,7 @@ import styles from './style.css'
 
 const SideBar = ({active, userRole}) => (
     <aside class={`${styles.sidebar} ${active && styles.sidebar_active}`}>
-        {userRole && userRole > 0 ? <Link to="/upload">Upload</Link> : null}
+        {userRole && <Link to="/upload">Upload</Link> }
     </aside>
 )
 

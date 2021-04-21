@@ -3,7 +3,7 @@ import styles from './style.css'
 import CatalogHeader from "./CatalogHeader";
 import List from "./List";
 import ListNavigation from "./List/ListNavigation";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const Catalog = () => {
     const list = useSelector(state => state.list.data)
